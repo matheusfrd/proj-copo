@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,700&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Personalize</title>
 
     <!-- VUE -->
@@ -48,6 +49,17 @@
 
             <div class="row">
                 <div class="col">
+                    <div class="row mt-1">
+                        <button class="btn btn-info seta" @click="seta"><i class="fa-solid fa-angles-left"></i></button>
+                    </div>
+                    <div class="row mt-3">
+                        <button class="btn btn-info seta"><i class="fa-solid fa-angles-left"></i></button>
+                    </div>
+                    <div class="row mt-5">
+                        <button class="btn btn-info seta"><i class="fa-solid fa-angles-left"></i></button>
+                    </div>
+                </div>
+                <div class="col">
                     <div class="row">
                         <img class="img-fluid background-image" :src="bico" alt="">
                     </div>
@@ -61,6 +73,9 @@
                             <!-- <img src="https://fakeimg.pl/250x100/"> -->
                         </div>
                     </div>
+                </div>
+                <div class="col">
+                    ali
                 </div>
                 <!-- TIPO DO BICO-->
                 <!--AQUIQUQIUQIQUIQU-->
@@ -195,6 +210,11 @@
                                 return ['imagens/Tipo02/bico_azul.png']
                         }
                     },
+                    seta() {
+                        this.inputTipoBico
+                        return 'imagens/Tipo02/bico_verde.png'
+                    },
+
                     tampa() {
                         switch (this.inputTipoTampa) {
                             case 'azul':
@@ -331,7 +351,7 @@
                 align-content: center;
                 border-radius: 30px;
                 background-color: #fff;
-                width: 700px;
+                width: 800px;
                 height: 500px;
                 font-family: 'Roboto', sans-serif;
                 font-size: 20px;
@@ -344,6 +364,12 @@
                 display: flex;
                 align-items: center;
                 background-color: #96f2d7;
+            }
+
+            .seta{
+                background-color: #83daf763 !important;
+                width: 40px;
+                border-radius: 90px;
             }
 
             /* .img-bico {
