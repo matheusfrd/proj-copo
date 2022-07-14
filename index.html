@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,700&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Personalize</title>
 
     <!-- VUE -->
@@ -48,9 +48,9 @@
         <div id="app">
 
             <div class="row">
-                <div class="col">
+                <div class="col col-seta">
                     <div class="row mt-1">
-                        <button class="btn btn-info seta" @click="seta"><i class="fa-solid fa-angles-left"></i></button>
+                        <button class="btn btn-info seta" @click="next"><i class="fa-solid fa-angles-left"></i></button>
                     </div>
                     <div class="row mt-3">
                         <button class="btn btn-info seta"><i class="fa-solid fa-angles-left"></i></button>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col">
                     <div class="row">
-                        <img class="img-fluid background-image" :src="bico" alt="">
+                        <img class="img-fluid" v-show="visible" :name="dir" alt="">
                     </div>
                     <div class="row">
                         <img class="img-fluid" :src="tampa" alt="">
@@ -75,7 +75,15 @@
                     </div>
                 </div>
                 <div class="col">
-                    ali
+                    <div class="row mt-1">
+                        <button class="btn btn-info seta" @click.prevent="prev"><i class="fa-solid fa-angles-right"></i></button>
+                    </div>
+                    <div class="row mt-3">
+                        <button class="btn btn-info seta"><i class="fa-solid fa-angles-right"></i></button>
+                    </div>
+                    <div class="row mt-5">
+                        <button class="btn btn-info seta"><i class="fa-solid fa-angles-right"></i></button>
+                    </div>
                 </div>
                 <!-- TIPO DO BICO-->
                 <!--AQUIQUQIUQIQUIQU-->
@@ -191,108 +199,155 @@
                     inputTipoTampa: '',
                     inputTipoCorpo: '',
                     image: 'https://fakeimg.pl/200x150/',
+                    slides: ['imagens/Tipo02/bico_azul.png', 'imagens/Tipo02/bico_verde.png', 'imagens/Tipo02/bico_rosa.png'],
+                    slideDirection: '',
+                    index : 0,
                 },
                 beforeMount() {
                     var vm = this;
-                    console.log('antes de montar')
                     vm.get('img')
                 },
                 computed: {
-                    bico() {
-                        switch (this.inputTipoBico) {
-                            case 'azul':
-                                return ['imagens/Tipo02/bico_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/bico_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/bico_rosa.png']
-                            default:
-                                return ['imagens/Tipo02/bico_azul.png']
-                        }
+                    visible() {
+                        return this.index === this.index;
                     },
-                    seta() {
-                        this.inputTipoBico
-                        return 'imagens/Tipo02/bico_verde.png'
+                    dir() {
+                        console.log(this.slideDirection)
+                        return this.slideDirection;
                     },
-
-                    tampa() {
-                        switch (this.inputTipoTampa) {
-                            case 'azul':
-                                return ['imagens/Tipo02/tampa_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/tampa_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/tampa_rosa.png']
-                            default:
-                                return 'imagens/Tipo02/tampa_azul.png'
-                        }
-                    },
-                    corpo() {
-                        switch (this.inputTipoCorpo) {
-                            case 'azul':
-                                return ['imagens/Tipo02/corpo_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/corpo_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/corpo_rosa.png']
-                            default:
-                                return 'imagens/Tipo02/corpo_azul.png'
-                        }
-                    },
-                    // insereLogo() {
-                    //     this.inputTipoLogo = "https://fakeimg.pl/200x150/"
-                    // },
-
-
-
-                    // logo() {
-                    //     this.inputTipoLogo{
-                    //         return ttps://fakeimg.pl/250x100/"
-                    //     }
-                    // }
                 },
-                methods: {
-
-                    // salvarFoto(event) {
-                    //     this.inputTipoLogo = event.target.value
-                    //     console.log(event)
-                    // },
-                    get(key) {
-
-                        this.image = localStorage.getItem(key);
-                    },
-                    set(key) {
-                        var vm = this
-                        try {
-
-                            localStorage.setItem(key, this.image);
-                        }
-                        catch (e) {
-                            console.log(`Storage failed: ${e}`);
-                        }
-                    },
-                    onFileChange(e) {
-                        var files = e.target.files || e.dataTransfer.files;
-                        if (!files.length)
-                            return;
-                        this.createImage(files[0]);
-                    },
-                    createImage(file) {
-                        var image = new Image();
-                        var reader = new FileReader();
-                        var vm = this;
-
-                        reader.onload = (e) => {
-                            vm.image = e.target.result;
-                            vm.set('img');
-                        };
-                        reader.readAsDataURL(file);
-                    },
-                    removeImage: function (e) {
-                        this.image = '';
-                        localStorage.removeItem('img')
+                bico() {
+                    switch (this.inputTipoBico) {
+                        case 'azul':
+                            return ['imagens/Tipo02/bico_azul.png']
+                        case 'verde':
+                            return ['imagens/Tipo02/bico_verde.png']
+                        case 'rosa':
+                            return ['imagens/Tipo02/bico_rosa.png']
+                        default:
+                            return ['imagens/Tipo02/bico_azul.png']
                     }
-                }
+                },
+
+                tampa() {
+                    switch (this.inputTipoTampa) {
+                        case 'azul':
+                            return ['imagens/Tipo02/tampa_azul.png']
+                        case 'verde':
+                            return ['imagens/Tipo02/tampa_verde.png']
+                        case 'rosa':
+                            return ['imagens/Tipo02/tampa_rosa.png']
+                        default:
+                            return 'imagens/Tipo02/tampa_azul.png'
+                    }
+                },
+                corpo() {
+                    switch (this.inputTipoCorpo) {
+                        case 'azul':
+                            return ['imagens/Tipo02/corpo_azul.png']
+                        case 'verde':
+                            return ['imagens/Tipo02/corpo_verde.png']
+                        case 'rosa':
+                            return ['imagens/Tipo02/corpo_rosa.png']
+                        default:
+                            return 'imagens/Tipo02/corpo_azul.png'
+                    }
+                },
+                slidesLength() {
+                    return this.slides.length;
+                },
+                
+                mounted() {
+                this.slides = this.$children;
+                this.slides.map((slide, index) => {
+                    slide.index = index;
+                });
+                },
+                
+                methods: {
+                get(key) {
+
+                    this.image = localStorage.getItem(key);
+                },
+                set(key) {
+                    var vm = this
+                    try {
+
+                        localStorage.setItem(key, this.image);
+                    }
+                    catch (e) {
+                        console.log(`Storage failed: ${e}`);
+                    }
+                },
+                onFileChange(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        vm.image = e.target.result;
+                        vm.set('img');
+                    };
+                    reader.readAsDataURL(file);
+                },
+                removeImage: function (e) {
+                    this.image = '';
+                    localStorage.removeItem('img')
+                },
+                setaBicoEsquerda(event) {
+                    // for (let i = 0; i < this.setaBico.length; i++) {
+                    //     const element = this.setaBico[i];
+                    //     console.log(element)
+
+                    // }
+                    if (increment) {
+                        count++
+                    } else {
+                        count--
+                    }
+
+                    if (count > this.setaBico.lenght) {
+                        count = 0;
+                    }
+
+                    if (count < 0) {
+                        count = this.setaBico.lenght
+                    }
+
+                    console.log(this.setaBico)
+
+
+                },
+                next() {
+                    this.index++;
+                    if (this.index >= this.slidesLength) {
+                        this.index = 0;
+                    }
+                    this.slideDirection = 'slide-right';
+                },
+                prev() {
+                    this.index--;
+                    if (this.index < 0) {
+                        this.index = this.slidesLength - 1;
+                    }
+                    this.slideDirection = 'slide-left';
+                },
+                checkSlide(event) {
+                    if (event.keyCode === 39) {
+                        this.next();
+                    } else if (event.keyCode === 37) {
+                        this.prev();
+                    } else {
+                        return;
+                    }
+                },
+            }
             })
         </script>
         <style>
@@ -305,6 +360,7 @@
 
             .inputAzul {
                 background-color: #748ffc !important;
+                z-index: 1;
             }
 
             .inputVerde {
@@ -314,6 +370,7 @@
             .inputRosa {
                 background-color: #f783ac !important;
             }
+
             .add-image {
                 background-color: #748ffc;
             }
@@ -366,7 +423,7 @@
                 background-color: #96f2d7;
             }
 
-            .seta{
+            .seta {
                 background-color: #83daf763 !important;
                 width: 40px;
                 border-radius: 90px;
