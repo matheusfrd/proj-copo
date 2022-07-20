@@ -61,16 +61,16 @@
                 </div>
                 <div class="col">
                     <div class="row">
-                        <img class="img-fluid" :src="setaBico[mudaBico]" alt="">
+                        <img class="img-fluid" :src="{setaBico}" alt="">
                     </div>
                     <div class="row">
                         <img class="img-fluid" :src="setaTampa[mudaTampa]" alt="">
                     </div>
                     <div class="row">
                         <img class="img-fluid" :src="setaCorpo[mudaCorpo]" alt="">
-                        <div :class="logo">
+                        <!-- <div :class="logo">
                             <img :src="image" class="img-logo" alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col">
@@ -93,8 +93,8 @@
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div class="form-check form-check-inline borda-cores">
-                                <input class="form-check-input inputAzul" type="radio" value="azul"
-                                    v-model="inputTipoBico">
+                                <input class="form-check-input inputAzul" checked="true" type="radio" value="azulgay"
+                                    @click="setaBicoEsquerda('azul')" v-model="bicoAzul">
                                 <label class="form-check-label">
                                     Azul
                                 </label>
@@ -194,16 +194,22 @@
             const vm = new Vue({
                 el: '#app',
                 data: {
+                    bicoAzul: '',
                     inputTipoBico: '',
                     inputTipoTampa: '',
                     inputTipoCorpo: '',
                     image: 'https://fakeimg.pl/200x150/',
-                    setaBico: ['imagens/Tipo02/bico_azul.png', 'imagens/Tipo02/bico_verde.png','imagens/Tipo02/bico_rosa.png'],
+                    // setaBico: ['imagens/Tipo02/bico_azul.png', 'imagens/Tipo02/bico_verde.png','imagens/Tipo02/bico_rosa.png'],
                     setaTampa: ['imagens/Tipo02/tampa_azul.png', 'imagens/Tipo02/tampa_verde.png', 'imagens/Tipo02/tampa_rosa.png'],
                     setaCorpo: ['imagens/Tipo02/corpo_azul.png', 'imagens/Tipo02/corpo_verde.png', 'imagens/Tipo02/corpo_rosa.png'],
                     mudaBico: 0,
                     mudaTampa: 0,
                     mudaCorpo: 0,
+                    setaBico: {
+                        azul: "'imagens/Tipo02/bico_azul.png'",
+                        verde: 'imagens/Tipo02/bico_verde.png',
+                        rosa: 'imagens/Tipo02/bico_rosa.png'
+                    }
 
                 },
                 beforeMount() {
@@ -286,19 +292,28 @@
                         localStorage.removeItem('img')
                     },
                     setaBicoEsquerda(i){
-                        if (i == 'esquerda') {
-                            this.mudaBico--
-                        } else {
-                            if (this.mudaBico >= (this.setaBico.length - 1)) {
-                                this.mudaBico = 0;
-                            } else {
-                                this.mudaBico++
-                            }
-                        }
-                        if (this.mudaBico < 0) {
-                            this.mudaBico = this.setaBico.length - 1;
-                        }
+                        console.log(i)
+                        if (i == 'bicoEsquerda' || 'azul') {
+                            this.setaBico.verde
+                            this.bicoAzul.checked = false;
+                            console.log(this.bicoAzul)
+                            console.log(this.setaBico.verde)
+                        } 
                     },
+                    // setaBicoEsquerda(i){
+                    //     if (i == 'esquerda') {
+                    //         this.mudaBico--
+                    //     } else {
+                    //         if (this.mudaBico >= (this.setaBico.length - 1)) {
+                    //             this.mudaBico = 0;
+                    //         } else {
+                    //             this.mudaBico++
+                    //         }
+                    //     }
+                    //     if (this.mudaBico < 0) {
+                    //         this.mudaBico = this.setaBico.length - 1;
+                    //     }
+                    // },
                     setaTampaEsquerda(i){
                         if (i == 'esquerda') {
                             this.mudaTampa--
