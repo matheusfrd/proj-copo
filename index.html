@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,700&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Personalize</title>
 
     <!-- VUE -->
@@ -50,38 +50,44 @@
             <div class="row">
                 <div class="col col-seta">
                     <div class="row mt-1">
-                        <button class="btn btn-info seta" @click="setaBicoEsquerda('esquerda')"><i class="fa-solid fa-angles-left"></i></button>
+                        <button class="btn btn-info seta" @click="setaBicoEsquerda('esquerda')"><i
+                                class="fa-solid fa-angles-left"></i></button>
                     </div>
                     <div class="row mt-3">
-                        <button class="btn btn-info seta" @click="setaTampaEsquerda('esquerda')"><i class="fa-solid fa-angles-left"></i></button>
+                        <button class="btn btn-info seta" @click="setaTampaEsquerda('esquerda')"><i
+                                class="fa-solid fa-angles-left"></i></button>
                     </div>
                     <div class="row mt-5">
-                        <button class="btn btn-info seta" @click="setaCorpoEsquerda('esquerda')"><i class="fa-solid fa-angles-left"></i></button>
+                        <button class="btn btn-info seta" @click="setaCorpoEsquerda('esquerda')"><i
+                                class="fa-solid fa-angles-left"></i></button>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="row">
-                        <img class="img-fluid" :src="{setaBico}" alt="">
+                <div class="col-4 w-25">
+                    <div>
+                        <img class="img-fluid" :src="setaBico[mudaBico]" alt="">
                     </div>
                     <div class="row">
                         <img class="img-fluid" :src="setaTampa[mudaTampa]" alt="">
                     </div>
                     <div class="row">
                         <img class="img-fluid" :src="setaCorpo[mudaCorpo]" alt="">
-                        <!-- <div :class="logo">
+                        <div :class="logo">
                             <img :src="image" class="img-logo" alt="">
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mt-1">
-                        <button class="btn btn-info seta" @click="setaBicoEsquerda('direita')"><i class="fa-solid fa-angles-right"></i></button>
+                        <button class="btn btn-info seta" @click="setaBicoEsquerda('direita')"><i
+                                class="fa-solid fa-angles-right"></i></button>
                     </div>
                     <div class="row mt-3">
-                        <button class="btn btn-info seta" @click="setaTampaEsquerda('direita')"><i class="fa-solid fa-angles-right"></i></button>
+                        <button class="btn btn-info seta" @click="setaTampaEsquerda('direita')"><i
+                                class="fa-solid fa-angles-right"></i></button>
                     </div>
                     <div class="row mt-5">
-                        <button class="btn btn-info seta" @click="setaCorpoEsquerda('direita')"><i class="fa-solid fa-angles-right"></i></button>
+                        <button class="btn btn-info seta" @click="setaCorpoEsquerda('direita')"><i
+                                class="fa-solid fa-angles-right"></i></button>
                     </div>
                 </div>
                 <!-- TIPO DO BICO-->
@@ -93,22 +99,22 @@
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div class="form-check form-check-inline borda-cores">
-                                <input class="form-check-input inputAzul" checked="true" type="radio" value="azulgay"
-                                    @click="setaBicoEsquerda('azul')" v-model="bicoAzul">
+                                <input class="form-check-input inputAzul" type="radio" value="azul" name="bico"
+                                    :checked="mudaBico == 0" @click="paletaDeCor(0, $event.target.name)">
                                 <label class="form-check-label">
                                     Azul
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputVerde" type="radio" value="verde"
-                                    v-model="inputTipoBico">
+                                <input class="form-check-input inputVerde" type="radio" value="verde" name="bico"
+                                    :checked="mudaBico == 1" @click="paletaDeCor(1, $event.target.name)">
                                 <label class="form-check-label">
                                     Verde
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputRosa" type="radio" value="rosa"
-                                    v-model="inputTipoBico">
+                                <input class="form-check-input inputRosa" type="radio" value="rosa" name="bico"
+                                    :checked="mudaBico == 2" @click="paletaDeCor(2, $event.target.name)">
                                 <label class="form-check-label">
                                     Rosa
                                 </label>
@@ -122,22 +128,22 @@
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputAzul" type="radio" value="azul"
-                                    v-model="inputTipoTampa">
+                                <input class="form-check-input inputAzul" type="radio" value="azul" name="tampa"
+                                    :checked="mudaTampa == 0" @click="paletaDeCor(0, $event.target.name)">
                                 <label class="form-check-label">
                                     Azul
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputVerde" type="radio" value="verde"
-                                    v-model="inputTipoTampa">
+                                <input class="form-check-input inputVerde" type="radio" value="verde" name="tampa"
+                                    :checked="mudaTampa == 1" @click="paletaDeCor(1, $event.target.name)">
                                 <label class="form-check-label">
                                     Verde
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputRosa" type="radio" value="rosa"
-                                    v-model="inputTipoTampa">
+                                <input class="form-check-input inputRosa" type="radio" value="rosa" name="tampa"
+                                    :checked="mudaTampa == 2" @click="paletaDeCor(2, $event.target.name)">
                                 <label class="form-check-label">
                                     Rosa
                                 </label>
@@ -151,22 +157,22 @@
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputAzul" type="radio" value="azul"
-                                    v-model="inputTipoCorpo">
+                                <input class="form-check-input inputAzul" type="radio" value="azul" name="corpo"
+                                    :checked="mudaCorpo == 0" @click="paletaDeCor(0, $event.target.name)">
                                 <label class="form-check-label">
                                     Azul
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputVerde" type="radio" value="verde"
-                                    v-model="inputTipoCorpo">
+                                <input class="form-check-input inputVerde" type="radio" value="verde" name="corpo"
+                                    :checked="mudaCorpo == 1" @click="paletaDeCor(1, $event.target.name)">
                                 <label class="form-check-label">
                                     Verde
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input inputRosa" type="radio" value="rosa"
-                                    v-model="inputTipoCorpo">
+                                <input class="form-check-input inputRosa" type="radio" value="rosa" name="corpo"
+                                    :checked="mudaCorpo == 2" @click="paletaDeCor(2, $event.target.name)">
                                 <label class="form-check-label">
                                     Rosa
                                 </label>
@@ -199,17 +205,12 @@
                     inputTipoTampa: '',
                     inputTipoCorpo: '',
                     image: 'https://fakeimg.pl/200x150/',
-                    // setaBico: ['imagens/Tipo02/bico_azul.png', 'imagens/Tipo02/bico_verde.png','imagens/Tipo02/bico_rosa.png'],
+                    setaBico: ['imagens/Tipo02/bico_azul.png', 'imagens/Tipo02/bico_verde.png', 'imagens/Tipo02/bico_rosa.png'],
                     setaTampa: ['imagens/Tipo02/tampa_azul.png', 'imagens/Tipo02/tampa_verde.png', 'imagens/Tipo02/tampa_rosa.png'],
                     setaCorpo: ['imagens/Tipo02/corpo_azul.png', 'imagens/Tipo02/corpo_verde.png', 'imagens/Tipo02/corpo_rosa.png'],
                     mudaBico: 0,
                     mudaTampa: 0,
                     mudaCorpo: 0,
-                    setaBico: {
-                        azul: "'imagens/Tipo02/bico_azul.png'",
-                        verde: 'imagens/Tipo02/bico_verde.png',
-                        rosa: 'imagens/Tipo02/bico_rosa.png'
-                    }
 
                 },
                 beforeMount() {
@@ -217,43 +218,7 @@
                     vm.get('img')
                 },
                 computed: {
-                    bico() {
-                        switch (this.setaBico) {
-                            case 'azul':
-                                return ['imagens/Tipo02/bico_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/bico_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/bico_rosa.png']
-                            default:
-                                return ['imagens/Tipo02/bico_azul.png']
-                        }
-                    },
-                    
-                    tampa() {
-                        switch (this.inputTipoTampa) {
-                            case 'azul':
-                                return ['imagens/Tipo02/tampa_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/tampa_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/tampa_rosa.png']
-                            default:
-                                return 'imagens/Tipo02/tampa_azul.png'
-                        }
-                    },
-                    corpo() {
-                        switch (this.inputTipoCorpo) {
-                            case 'azul':
-                                return ['imagens/Tipo02/corpo_azul.png']
-                            case 'verde':
-                                return ['imagens/Tipo02/corpo_verde.png']
-                            case 'rosa':
-                                return ['imagens/Tipo02/corpo_rosa.png']
-                            default:
-                                return 'imagens/Tipo02/corpo_azul.png'
-                        }
-                    },
+
                 },
                 methods: {
                     get(key) {
@@ -291,30 +256,32 @@
                         this.image = '';
                         localStorage.removeItem('img')
                     },
-                    setaBicoEsquerda(i){
-                        console.log(i)
-                        if (i == 'bicoEsquerda' || 'azul') {
-                            this.setaBico.verde
-                            this.bicoAzul.checked = false;
-                            console.log(this.bicoAzul)
-                            console.log(this.setaBico.verde)
-                        } 
+                    paletaDeCor(index, tipo) {
+                        if (tipo == 'bico') {
+                            this.mudaBico = index;
+                        } else if (tipo == 'tampa') {
+                            this.mudaTampa = index;
+                        } else {
+                            this.mudaCorpo = index;
+                        }
+
                     },
-                    // setaBicoEsquerda(i){
-                    //     if (i == 'esquerda') {
-                    //         this.mudaBico--
-                    //     } else {
-                    //         if (this.mudaBico >= (this.setaBico.length - 1)) {
-                    //             this.mudaBico = 0;
-                    //         } else {
-                    //             this.mudaBico++
-                    //         }
-                    //     }
-                    //     if (this.mudaBico < 0) {
-                    //         this.mudaBico = this.setaBico.length - 1;
-                    //     }
-                    // },
-                    setaTampaEsquerda(i){
+                    setaBicoEsquerda(i) {
+                        if (i == 'esquerda') {
+                            this.mudaBico--
+                        } else {
+                            if (this.mudaBico >= (this.setaBico.length - 1)) {
+                                this.mudaBico = 0;
+                            } else {
+                                this.mudaBico++
+                            }
+                        }
+                        if (this.mudaBico < 0) {
+                            this.mudaBico = this.setaBico.length - 1;
+                        }
+
+                    },
+                    setaTampaEsquerda(i) {
                         if (i == 'esquerda') {
                             this.mudaTampa--
                         } else {
@@ -328,7 +295,7 @@
                             this.mudaTampa = this.setaTampa.length - 1;
                         }
                     },
-                    setaCorpoEsquerda(i){
+                    setaCorpoEsquerda(i) {
                         if (i == 'esquerda') {
                             this.mudaCorpo--
                         } else {
@@ -348,9 +315,9 @@
         <style>
             .img-fluid {
                 width: auto;
-                height: 300px;
+                height: 500px;
                 position: absolute;
-                margin-right: 5px;
+                margin-right: 50px;
             }
 
             .inputAzul {
@@ -365,6 +332,7 @@
             .inputRosa {
                 background-color: #f783ac !important;
             }
+
             .add-image {
                 background-color: #748ffc;
             }
@@ -417,7 +385,7 @@
                 background-color: #96f2d7;
             }
 
-            .seta{
+            .seta {
                 background-color: #83daf763 !important;
                 width: 40px;
                 border-radius: 90px;
